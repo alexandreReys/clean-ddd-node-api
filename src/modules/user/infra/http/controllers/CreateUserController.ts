@@ -11,8 +11,7 @@ export class CreateUserController extends BaseController {
       return this.created(this.res);
     } catch (err) {
       const error = err instanceof Error ? err : "An unknown error occurred";
-      console.log("Error:", error.toString());
-      return this.fail(error);
+      return this.clientError(error.toString());
     }
   }
 }

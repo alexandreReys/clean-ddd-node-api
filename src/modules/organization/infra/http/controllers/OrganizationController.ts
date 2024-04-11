@@ -1,4 +1,3 @@
-import { Request, Response, json } from "express";
 import { BaseController } from "src/core/infra/BaseController";
 import { CreateOrganizationService } from "../../../application/services/CreateOrganizationService";
 import { OrganizationRepository } from "../../database/prisma/repositories/PrismaOrganizationRepository";
@@ -12,8 +11,7 @@ export class CreateOrganizationController extends BaseController {
       return this.created(this.res);
     } catch (err) {
       const error = err instanceof Error ? err : "An unknown error occurred";
-      console.log("Error:", error.toString());
-      return this.fail(error);
+      return this.clientError(error.toString());
     }
   }
 }
