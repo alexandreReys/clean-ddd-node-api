@@ -10,7 +10,7 @@ const convertToOrganizationDTO = (
   if (!organizationData) return null;
 
   const { id, name, email, phone } = organizationData;
-  const organization = new Organization(id, name, email, "", phone);
+  const organization = new Organization(id, name, email, phone);
 
   return organization.toDTO();
 };

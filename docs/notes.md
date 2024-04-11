@@ -32,7 +32,6 @@ model Organization {
 id String @id @default(uuid())
 name String
 email String
-password String
 phone String
 
 @@map("organizations")
