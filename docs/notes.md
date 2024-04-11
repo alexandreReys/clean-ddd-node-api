@@ -14,6 +14,9 @@ docker container exec -it /bin/bash anr_saas
 
 npm i express
 npm i typescript @types/express prisma tsx -D
+npm i bcrypt
+npm i @types/bcrypt -D
+
 mkdir src
 touch src/server.ts
 npx tsc --init
@@ -36,6 +39,7 @@ phone String
 }
 
 npx prisma migrate dev --name create-organizations
+npx prisma migrate dev --name create-users
 npx prisma studio
 ou
 dbeaver
