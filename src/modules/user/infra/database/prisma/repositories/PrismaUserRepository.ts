@@ -4,15 +4,6 @@ import { prismaClient } from "src/infra/database/prismaClient";
 import { ICreateUserDTO } from "@modules/user/application/dtos/ICreateUserDTO";
 import { IUserDTO } from "@modules/user/application/dtos/IUserDTO";
 
-const convertToUserDTO = (userData: IUserDTO | null) => {
-  if (!userData) return null;
-
-  const { id, name, email, phone } = userData;
-  const user = new User(id, name, email, "", phone);
-
-  return user.toDTO();
-};
-
 export class UserRepository implements IUserRepository {
   constructor() {}
 
@@ -23,10 +14,19 @@ export class UserRepository implements IUserRepository {
       },
     });
 
-    return convertToUserDTO(userData);
+    return userData;
   }
 
   async create(data: ICreateUserDTO): Promise<IUserDTO | null> {
+    const convertToUserDTO = (userData: IUserDTO | null) => {
+      if (!userData) return null;
+
+      const { id, name, email, phone } = userData;
+      const user = new User(id, name, email, "", phone);
+
+      return user.toDTO();
+    };
+
     const userData = await prismaClient.user.create({
       data: {
         ...data,
